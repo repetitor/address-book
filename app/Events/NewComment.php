@@ -28,7 +28,7 @@ class NewComment implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('opinions.'.$this->comment->opinion_id.'.comments'),
+            new PrivateChannel('users.'.$this->comment->opinion->user_id.'.comments'),
         ];
     }
 

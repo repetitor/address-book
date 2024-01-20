@@ -7,7 +7,6 @@ use App\Enums\RoleEnum;
 use App\Services\UserService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class RoleUserSeeder extends Seeder
 {
@@ -19,7 +18,7 @@ class RoleUserSeeder extends Seeder
         $userDto = (new UserDtoFactory())->fromArray([
             'name' => config('settings.admin.name'),
             'email' => config('settings.admin.email'),
-            'password' => Hash::make(config('settings.admin.password')),
+            'password' => config('settings.admin.password'),
         ]);
 
         DB::transaction(function () use ($userDto) {

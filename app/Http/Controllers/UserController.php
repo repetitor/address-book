@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\DTO\User\UserDtoFactory;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Models\User;
+use App\Http\Resources\UserResource;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,10 +32,11 @@ class UserController extends Controller
             ], 401);
         }
 
-        $user = User::where('email', $request['email'])->firstOrFail();
+        $user = auth()->user();
 
         return response()->json([
             'auth_token' => $this->userService->generateToken($user),
+            'user' => new UserResource($user),
         ]);
     }
 }

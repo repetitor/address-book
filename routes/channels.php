@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('opinions.{opinion}.comments', function ($user, $opinion) {
+Broadcast::channel('users.{user}.comments', function ($user, $opinion) {
     return (int) $user->id === (int) $opinion->user_id;
 });
