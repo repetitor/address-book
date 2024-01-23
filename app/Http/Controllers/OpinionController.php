@@ -25,11 +25,7 @@ class OpinionController extends Controller
 
     public function store(StoreRequest $request): OpinionResource
     {
-        $opinion = Opinion::create([
-            ...$request->validated(),
-            'user_id' => auth()->user()->id,
-        ]);
-
+        $opinion = $request->user()->opinions()->create($request->validated());
         event(new NewOpinion($opinion));
 
         return new OpinionResource($opinion->load('user'));
